@@ -20,12 +20,14 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private BigDecimal sum = new BigDecimal("00.0");
-    @ManyToOne(fetch = FetchType.EAGER)
+    private BigDecimal sum = new BigDecimal(0.00);
+    @OneToOne
     @JoinColumn(name = "person_id")
     private Person person;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
-    private List<Product> product = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "cart_product",
+    joinColumns = @JoinColumn(name = "cart_id"),
+    inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> product;
 
 }

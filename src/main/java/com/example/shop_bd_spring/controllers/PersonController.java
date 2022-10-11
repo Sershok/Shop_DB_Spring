@@ -30,13 +30,18 @@ public class PersonController {
         return personService.getAll();
     }
 
-    @GetMapping("/get_{id}")
-    public Person getById(@PathVariable Long id) {
-        return personService.getPerson(id);
+    @GetMapping("/get_'{id}'")
+    public Person getByFirstName(@PathVariable String id) {
+        return personService.findByFirstName(id);
     }
 
-    @GetMapping("/addCart_{id}")
-    public Person addCart(@PathVariable Long id) {
-        return personService.addCart(id);
+    @GetMapping("/cart_{personId}_'{name}'")
+    public void addCart(@PathVariable Long personId, @PathVariable String name) {
+        personService.addCart(personId, name);
+    }
+
+    @DeleteMapping("/delete_{id}")
+    public void deleteById(@PathVariable Long id) {
+        personService.DeleteById(id);
     }
 }

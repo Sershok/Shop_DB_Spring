@@ -11,16 +11,13 @@ public interface PersonService {
 
     Person findByFirstName(String name);
 
-    Person getPerson(Long id);
-
     void DeleteById(Long id);
 
-    Person addCart(Long id);
+    void save(Person person);
+
+    void addCart(Long productId, String name);
 
     List<PersonDto> getAll();
-
-
-
 
 
 }

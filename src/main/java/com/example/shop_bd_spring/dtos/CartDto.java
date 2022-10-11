@@ -1,6 +1,5 @@
 package com.example.shop_bd_spring.dtos;
 
-import com.example.shop_bd_spring.models.Cart;
 import com.example.shop_bd_spring.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

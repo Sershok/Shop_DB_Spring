@@ -15,11 +15,6 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    @PostMapping("/create_{personId}_{productId}")
-    public Long createCart(@PathVariable Long personId, @PathVariable Long productId) {
-        return cartService.createCart(personId, productId);
-    }
-
     @GetMapping("/get")
     public List<CartDto> getCart() {
         return cartService.getAll();
@@ -30,4 +25,8 @@ public class CartController {
         return cartService.getCart(id);
     }
 
+    @DeleteMapping("/delete_{id}")
+    public void deleteById(@PathVariable Long id) {
+        cartService.deleteById(id);
+    }
 }

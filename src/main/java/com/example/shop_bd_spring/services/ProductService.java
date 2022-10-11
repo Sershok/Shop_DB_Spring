@@ -9,10 +9,6 @@ public interface ProductService {
 
     Long createProduct(Product product);
 
-    Product findByName(String name);
-
-    Product getProduct(Long id);
-
     void deleteById(Long id);
 
     List<ProductDto> getAll();

@@ -22,11 +22,6 @@ public class Product {
     private String name;
     private BigDecimal price;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "shop_id")
-//    private Shop shops;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "cart_id")
-//    private Cart;
+
 
 }

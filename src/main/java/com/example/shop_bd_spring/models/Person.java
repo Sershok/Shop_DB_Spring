@@ -23,15 +23,9 @@ public class Person {
     private String lastName;
     private String email;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cart_id")
-    private List<Cart> cart = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private Cart cart;
 
-
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "shop_id")
-//    private Shop;
 
 
 }

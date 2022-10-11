@@ -16,7 +16,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/create")
-    public Long createProduct(@RequestBody ProductDto productDto){
+    public Long createProduct(@RequestBody ProductDto productDto) {
         Product product = new Product();
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
@@ -25,7 +25,12 @@ public class ProductController {
     }
 
     @GetMapping("/get")
-    public List<ProductDto> getProduct(){
+    public List<ProductDto> getProduct() {
         return productService.getAll();
+    }
+
+    @DeleteMapping("/delete_{id}")
+    public void deleteById(@PathVariable Long id) {
+        productService.deleteById(id);
     }
 }

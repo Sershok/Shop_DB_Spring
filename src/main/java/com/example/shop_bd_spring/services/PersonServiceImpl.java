@@ -3,7 +3,6 @@ package com.example.shop_bd_spring.services;
 import com.example.shop_bd_spring.dtos.PersonDto;
 import com.example.shop_bd_spring.models.Cart;
 import com.example.shop_bd_spring.models.Person;
-import com.example.shop_bd_spring.repositorys.CartRepository;
 import com.example.shop_bd_spring.repositorys.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +19,6 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private CartService cartService;
 
-    @Autowired
-    private CartRepository cartRepository;
-
     @Override
     public void createPerson(Person person) {
         personRepository.save(person);
@@ -35,22 +31,30 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person getPerson(Long id) {
-        Optional<Person> person = personRepository.findById(id);
-        return person.filter(p -> Objects.equals(p.getId(), id)).get();
-    }
-
-    @Override
     public void DeleteById(Long id) {
         personRepository.deleteById(id);
     }
 
     @Override
-    public Person addCart(Long id) {
-      Cart cart = new Cart();
-
-        return null;
+    public void save(Person person) {
+        personRepository.save(person);
     }
+
+    @Override
+    public void addCart(Long productId, String name) {
+
+        Person person = personRepository.findByFirstName(name);
+
+        Cart cart = person.getCart();
+        if (cart == null) {
+            Cart newCart = cartService.createCart(person, Collections.singletonList(productId));
+            person.setCart(newCart);
+            save(person);
+        } else {
+            cartService.addProduct(cart,Collections.singletonList(productId));
+        }
+    }
+
 
     @Override
     public List<PersonDto> getAll() {
@@ -63,10 +67,9 @@ public class PersonServiceImpl implements PersonService {
                 .firstName(person.getFirstName())
                 .lastName(person.getLastName())
                 .email(person.getEmail())
+                .cart(person.getCart())
                 .build();
     }
-//    List<Cart> carts = new ArrayList<>();
-//        carts.add(cartRepository.getReferenceById(cartRepository.save(cart).getId()));
-//        person.setCart(carts);
+
 
 }
